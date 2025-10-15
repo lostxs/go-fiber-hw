@@ -8,7 +8,7 @@ import (
 	"strings"
 )
 
-func New(cfg *config.LoggerConfig) {
+func New(cfg *config.LoggerConfig) *slog.Logger {
 	var handler slog.Handler
 
 	switch strings.ToLower(cfg.Format) {
@@ -24,5 +24,5 @@ func New(cfg *config.LoggerConfig) {
 		})
 	}
 
-	slog.SetDefault(slog.New(handler))
+	return slog.New(handler)
 }

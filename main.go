@@ -7,12 +7,15 @@ import (
 	"lostx/go-fiber-hw/pkg/logger"
 
 	"github.com/gofiber/fiber/v2"
+	slogfiber "github.com/samber/slog-fiber"
 )
 
 func main() {
 	cfg := config.Load()
-	logger.New(&cfg.Logger)
+	logger := logger.New(&cfg.Logger)
 	app := fiber.New()
+
+	app.Use(slogfiber.New(logger))
 
 	pages.NewHomeHandler(app)
 
